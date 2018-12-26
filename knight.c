@@ -11,6 +11,8 @@
 #include <string.h>
 #include <math.h>
 #define SIZE 8
+#define R_START 0
+#define C_START 0
 
   static int r,c,k; /* Row, Column, NextPosition */
   static int board[SIZE][SIZE] = {0}; /* Board Array */
@@ -26,7 +28,7 @@
      int n; 
   };
   /* Discovered interesting Array of Struct initialization! */
-  MOVES move[SIZE] = {1,2,2,1,2,-1,1,-2,-1,-2,-2,-1,-2,1,-1,2};/* Knights valid moves; note - first 2 elements go into array[0], etc. */
+  MOVES move[8] = {1,2,2,1,2,-1,1,-2,-1,-2,-2,-1,-2,1,-1,2};/* Knights valid moves; note - first 2 elements go into array[0], etc. */
 
 void init() {
   printf("Initializing ...\n");
@@ -36,8 +38,8 @@ void init() {
     }
   }
   k = 0; 
-  r = 0;
-  c = 0; /* Ideally, accept this from user and validate that it is on SIZExSIZE */
+  r = R_START;
+  c = C_START; /* Ideally, accept this from user and validate that it is on SIZExSIZE */
   board[r][c] = ++k; 
 }
 void next_pos() {
@@ -115,8 +117,8 @@ void test() {
 void draw(){
   printf("Drawing the board...\n");
   int t;
-  for (c=0; c<SIZE; c++){
-    for (r=0; r<SIZE; r++){
+  for (r=0; r<SIZE; r++){
+    for (c=0; c<SIZE; c++){
        t = board[r][c];
        printf(t>9?"%d ":" %d ", t); /* If number <= 9 then lpad space */
     }
